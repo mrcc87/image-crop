@@ -1,0 +1,19 @@
+<h1>Crop image</h1>
+
+<%= image_tag @user.avatar.url(:medium), id: 'cropbox' %>
+
+<%= hidden_field_tag 'avatar_width', Paperclip::Geometry.from_file(@user.avatar.path(:medium)).width %>
+<%= hidden_field_tag 'avatar_height', Paperclip::Geometry.from_file(@user.avatar.path(:medium)).height %>
+<br>
+
+<h4>Preview:</h4>
+<div style="width:100px; height:100px; overflow:hidden">
+  <%= image_tag @user.avatar.url(:medium), id: 'preview' %>
+</div>
+
+<%= form_for @user do |f| %>
+  <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+    <%= f.hidden_field attribute, :id => attribute %>
+  <% end %>
+  <p><%= f.submit "Crop" %></p>
+<% end %>
