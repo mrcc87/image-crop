@@ -21,9 +21,6 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def crop
-  end
-
   # POST /users
   def create
     @user = User.new(user_params)
